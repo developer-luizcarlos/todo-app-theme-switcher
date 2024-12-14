@@ -1,8 +1,15 @@
 "use client";
 
+import { useContext } from "react";
+import { Context } from "@/conponents/Context/Contex";
+
 const Home = () => {
+  const { theme } = useContext(Context)!;
+
   return (
-    <div></div>
+    <div>
+      <header className={theme === "dark" ? "bg-dark h-80" : "bg-light h-80"}></header>
+    </div>
   );
 };
 

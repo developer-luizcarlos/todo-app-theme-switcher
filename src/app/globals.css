@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+header {
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 header.bg-dark {
   background-image: url("../../public/images/bg-desktop-dark.jpg");
 }
