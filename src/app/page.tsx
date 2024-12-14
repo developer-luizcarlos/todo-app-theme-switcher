@@ -18,7 +18,7 @@ const Home = () => {
     <div className="w-full h-full">
       <header className={theme === "dark" ? "bg-dark h-80" : "bg-light h-80"}></header>
       <main className={theme === "dark" ? "h-full bg-very-dark-blue" : "h-full bg-very-light-grayish-blue"}>
-        <article className="w-[540px] absolute top-1/4 left-1/2 -translate-x-1/2">
+        <section className="w-[540px] absolute top-1/4 left-1/2 -translate-x-1/2">
 
           <header>
 
@@ -35,7 +35,7 @@ const Home = () => {
             </div>
             <Input />
           </header>
-        </article>
+        </section>
       </main>
     </div>
   );
