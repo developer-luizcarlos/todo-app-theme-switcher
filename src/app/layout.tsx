@@ -4,7 +4,7 @@ import "./globals.css";
 
 // Global context importation
 
-import ContextComponent from "@/conponents/Context/Contex";
+import ContextComponent from "@/components/Context/Contex";
 
 export const metadata: Metadata = {
   title: "Todo app task manager",

@@ -8,6 +8,12 @@
   box-sizing: border-box;
 }
 
+body,
+html {
+  width: 100dvw;
+  height: 100dvh;
+}
+
 header {
   background-repeat: no-repeat;
   background-size: cover;
@@ -20,3 +26,4 @@ header.bg-dark {
 header.bg-light {
   background-image: url("../../public/images/bg-desktop-light.jpg");
 }
+

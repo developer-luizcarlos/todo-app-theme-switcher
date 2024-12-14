@@ -13,7 +13,7 @@ interface ContextType {
   changeTheme: () => void;
 };
 
-type Action = { type: "ADD"; content: string; };
+type Action = { type: "ADD"; content: string; completed: boolean; };
 
 type State = { id: number, content: string, completed: boolean; };
 
@@ -28,7 +28,7 @@ const reducer = (state: State[], action: Action): State[] => {
     case "ADD":
       return [
         ...state,
-        { id: state.length, content: action.content, completed: false }
+        { id: state.length, content: action.content, completed: action.completed }
       ];
     default:
       return state;
