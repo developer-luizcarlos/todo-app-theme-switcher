@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { JosefinSans } from "@/lib/fonts";
 import "./globals.css";
 
+// Global context importation
+
+import ContextComponent from "@/conponents/Context/Contex";
+
 export const metadata: Metadata = {
   title: "Todo app task manager",
   description: "This app is a task manager built using NextJS and styled with TailwindCSS. You're able to create, edit, exclude or mark as done all the tasks existents tasks or the created ones by yourself.",
@@ -22,7 +26,9 @@ const RootLayout = ({
       <body
         className={`${ JosefinSans.className }`}
       >
-        {children}
+        <ContextComponent>
+          {children}
+        </ContextComponent>
       </body>
     </html>
   );
