@@ -61,38 +61,21 @@ const TaskWrapper = ({ id, text, isCompleted }: TaskProps) => {
     editTaskOptionRef.current!.style.display = "none";
   };
 
-  const changeMarkAsDoneTask = () => {
-    setIsTaskChecked((previousValue) => {
-      const newValue = !previousValue;
-      if(newValue) {
-        circleMarkAsChecked.current!.style.display = "none";
-        markedAsCheckIconRef.current!.style.display = "flex";
-      } else {
-        circleMarkAsChecked.current!.style.display = "initial";
-        markedAsCheckIconRef.current!.style.display = "none";
-      }
-
-      return newValue;
-    });
-  };
-
 
   return (
     <div className={theme == "dark" ? "w-full h-14 bg-very-dark-desaturated-blue rounded flex items-center justify-between" : "w-full h-14 bg-very-light-gray rounded flex items-center justify-between"}>
       <div className="flex items-center gap-3">
         <span
           ref={circleMarkAsChecked}
-          className="w-6 h-6 rounded-full border-2 border-dark-grayish-blue ml-2"
+          className={isCompleted ? "hidden" : "w-6 h-6 rounded-full border-2 border-dark-grayish-blue ml-2"}
           onClick={() => {
-            changeMarkAsDoneTask();
             dispatch({ type: "DONE", payload: id });
           }}
         ></span>
         <span
           ref={markedAsCheckIconRef}
-          className="w-6 h-6 rounded-full ml-2 bg-linear hidden items-center justify-center"
+          className={isCompleted ? "w-6 h-6 rounded-full ml-2 bg-linear flex items-center justify-center" : "hidden"}
           onClick={() => {
-            changeMarkAsDoneTask();
             dispatch({ type: "DONE", payload: id });
           }}
         >
