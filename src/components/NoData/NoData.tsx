@@ -5,7 +5,7 @@ import { useContext } from "react";
 import Image from "next/image";
 
 // global context importation
-import { Context } from "../Context/Contex";
+import { Context } from "../Context/Context";
 
 const NoData = () => {
   const { theme } = useContext(Context)!;

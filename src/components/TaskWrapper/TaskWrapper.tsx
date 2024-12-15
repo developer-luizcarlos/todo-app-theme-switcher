@@ -5,7 +5,7 @@
 import { KeyboardEvent, useContext, useRef, useState } from "react";
 
 // context importation
-import { Context } from "../Context/Contex";
+import { Context } from "../Context/Context";
 
 // icons importation
 import { FaTrash } from "react-icons/fa";

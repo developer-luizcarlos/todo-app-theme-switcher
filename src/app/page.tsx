@@ -5,7 +5,7 @@ import { useContext } from "react";
 import Image from "next/image";
 
 // context importation
-import { Context } from "@/components/Context/Contex";
+import { Context } from "@/components/Context/Context";
 
 // components importation
 import Input from "@/components/Input/Input";
