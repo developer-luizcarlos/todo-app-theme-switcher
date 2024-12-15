@@ -3,6 +3,7 @@
 import { useContext, useState } from "react";
 import { Context } from "../Context/Context";
 import TaskWrapper from "../TaskWrapper/TaskWrapper";
+import EmptyList from "../EmptyList/EmptyList";
 
 type tasksShowedType = "all" | "active" | "completed";
 
@@ -21,9 +22,9 @@ const ListingTasks = () => {
           if(tasksShowed === "all") {
             return taskElement;
           } else if(tasksShowed === "active") {
-            if(!task.completed) return taskElement;
+            return !task.completed ? taskElement : <EmptyList key={task.id} />;
           } else if(tasksShowed === "completed") {
-            if(task.completed) return taskElement;
+            return task.completed ? taskElement : <EmptyList key={task.id} />;
           }
         })}
       </div>
