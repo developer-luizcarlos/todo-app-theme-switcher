@@ -16,13 +16,11 @@ const Input = () => {
 
   // states
   const [inputValue, setInputValue] = useState<string>("");
+  const [isTaskChecked, setIsTaskChecked] = useState<boolean>(false);
 
   // refs
   const circleMarkAsChecked = useRef<HTMLSpanElement>(null);
   const markedAsCheckIconRef = useRef<HTMLSpanElement>(null);
-
-  // global and other variables
-  let isTaskChecked = false;
 
   // functions
   const createTask = (value: string): void => {
@@ -34,15 +32,19 @@ const Input = () => {
   };
 
   const changeMarkAsDoneTask = () => {
-    isTaskChecked = !isTaskChecked;
+    setIsTaskChecked((previousValue) => {
+      const newValue = !previousValue;
 
-    if(isTaskChecked) {
-      circleMarkAsChecked.current!.style.display = "none";
-      markedAsCheckIconRef.current!.style.display = "flex";
-    } else {
-      circleMarkAsChecked.current!.style.display = "initial";
-      markedAsCheckIconRef.current!.style.display = "none";
-    }
+      if(newValue) {
+        circleMarkAsChecked.current!.style.display = "none";
+        markedAsCheckIconRef.current!.style.display = "flex";
+      } else {
+        circleMarkAsChecked.current!.style.display = "initial";
+        markedAsCheckIconRef.current!.style.display = "none";
+      }
+
+      return newValue;
+    });
   };
 
   return (
