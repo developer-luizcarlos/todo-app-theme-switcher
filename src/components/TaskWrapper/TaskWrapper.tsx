@@ -78,7 +78,7 @@ const TaskWrapper = ({ id, text, isCompleted }: TaskProps) => {
 
 
   return (
-    <div className={theme == "dark" ? "w-full h-14 rounded flex items-center justify-between" : "w-full h-14 rounded flex items-center justify-between"}>
+    <div className={theme == "dark" ? "w-full h-14 bg-very-dark-desaturated-blue rounded flex items-center justify-between" : "w-full h-14 bg-very-light-gray rounded flex items-center justify-between"}>
       <div className="flex items-center gap-3">
         <span
           ref={circleMarkAsChecked}
