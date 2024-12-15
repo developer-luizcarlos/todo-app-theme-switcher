@@ -1,7 +1,7 @@
 "use client";
 
 // hooks and utilities importation
-import { KeyboardEvent, useContext, useRef } from "react";
+import { KeyboardEvent, useContext, useRef, useState } from "react";
 
 // context importation
 import { Context } from "../Context/Contex";
@@ -12,18 +12,20 @@ import { FaCheck } from "react-icons/fa6";
 
 
 interface TaskProps {
+  id: number;
   text: string;
   isCompleted: boolean;
 }
 
-const TaskWrapper = ({ text, isCompleted }: TaskProps) => {
+const TaskWrapper = ({ id, text, isCompleted }: TaskProps) => {
   // context usage
-  const { theme } = useContext(Context)!;
+  const { theme, dispatch } = useContext(Context)!;
 
   // global variables
-  let isTaskChecked: boolean = false;
+  const [isTaskChecked, setIsTaskChecked] = useState<boolean>(false);
 
-  // const [isTaskChecked, setIsTaskChecked] = useState<boolean>(false);
+  // States
+  const [newTaskContent, setNewTaskContent] = useState<string>("");
 
   // refs
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -39,6 +41,18 @@ const TaskWrapper = ({ text, isCompleted }: TaskProps) => {
     deleteButtonRef.current!.style.display = "none";
     inputRef.current!.style.display = "initial";
     editTaskOptionRef.current!.style.display = "flex";
+
+    inputRef.current!.focus();
+  };
+
+  const editTaskContent = (id: number) => {
+    if(newTaskContent.trim()) {
+      dispatch({ type: "EDIT", payload: id, content: newTaskContent, completed: isTaskChecked });
+    } else {
+      alert(`It's impossible to edit the task with an empty value`);
+    }
+
+    cancelTaskEditAction();
   };
 
   const cancelTaskEditAction = () => {
@@ -49,16 +63,19 @@ const TaskWrapper = ({ text, isCompleted }: TaskProps) => {
   };
 
   const changeMarkAsDoneTask = () => {
-    isTaskChecked = !isTaskChecked;
-
-    if(isTaskChecked) {
-      circleMarkAsChecked.current!.style.display = "none";
-      markedAsCheckIconRef.current!.style.display = "flex";
-    } else {
-      circleMarkAsChecked.current!.style.display = "initial";
-      markedAsCheckIconRef.current!.style.display = "none";
-    }
+    setIsTaskChecked((previousValue) => {
+      const newValue = !previousValue;
+      if(newValue) {
+        circleMarkAsChecked.current!.style.display = "none";
+        markedAsCheckIconRef.current!.style.display = "flex";
+      } else {
+        circleMarkAsChecked.current!.style.display = "initial";
+        markedAsCheckIconRef.current!.style.display = "none";
+      }
+      return newValue;
+    });
   };
+
 
   return (
     <div className={theme == "dark" ? "w-full h-14 rounded flex items-center justify-between" : "w-full h-14 rounded flex items-center justify-between"}>
@@ -91,6 +108,7 @@ const TaskWrapper = ({ text, isCompleted }: TaskProps) => {
         </h2>
         <input
           ref={inputRef}
+          value={newTaskContent}
           type="text"
           className={
             theme == "dark"
@@ -99,8 +117,12 @@ const TaskWrapper = ({ text, isCompleted }: TaskProps) => {
           onKeyDown={(e: KeyboardEvent) => {
             if(e.key === "Escape") {
               cancelTaskEditAction();
+            } else if(e.key === "Enter") {
+              editTaskContent(id);
             }
-          }}
+          }
+          }
+          onChange={(e) => setNewTaskContent(e.target.value)}
         />
       </div>
       <button
@@ -112,7 +134,10 @@ const TaskWrapper = ({ text, isCompleted }: TaskProps) => {
       <div
         ref={editTaskOptionRef}
         className="hidden items-center gap-3 mr-3">
-        <button className="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center">
+        <button
+          className="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center"
+          onClick={() => editTaskContent(id)}
+        >
           <FaCheck className="text-very-light-gray" />
         </button>
 
