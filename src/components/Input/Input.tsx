@@ -1,10 +1,14 @@
 "use client";
 
 // hooks importation
-import { useContext, useState, KeyboardEvent } from "react";
+import { useContext, useState, useRef, KeyboardEvent } from "react";
 
 // context importation
 import { Context } from "../Context/Contex";
+
+// icons importation
+import { FaCheck } from "react-icons/fa6";
+
 
 const Input = () => {
   // context values
@@ -13,8 +17,12 @@ const Input = () => {
   // states
   const [inputValue, setInputValue] = useState<string>("");
 
+  // refs
+  const circleMarkAsChecked = useRef<HTMLSpanElement>(null);
+  const markedAsCheckIconRef = useRef<HTMLSpanElement>(null);
+
   // global and other variables
-  const isTaskChecked = false;
+  let isTaskChecked = false;
 
   // functions
   const createTask = (value: string): void => {
@@ -25,12 +33,35 @@ const Input = () => {
     }
   };
 
+  const changeMarkAsDoneTask = () => {
+    isTaskChecked = !isTaskChecked;
+
+    if(isTaskChecked) {
+      circleMarkAsChecked.current!.style.display = "none";
+      markedAsCheckIconRef.current!.style.display = "flex";
+    } else {
+      circleMarkAsChecked.current!.style.display = "initial";
+      markedAsCheckIconRef.current!.style.display = "none";
+    }
+  };
+
   return (
     <div
       className={theme == "dark" ? "w-full h-14 bg-very-dark-desaturated-blue rounded flex items-center justify-between" : "w-full h-14 bg-very-light-gray rounded flex items-center justify-between"}
     >
       <span
-        className="w-6 h-6 rounded-full border-2 border-dark-grayish-blue ml-2"></span>
+        ref={circleMarkAsChecked}
+        className="w-6 h-6 rounded-full border-2 border-dark-grayish-blue ml-2"
+        onClick={changeMarkAsDoneTask}
+      ></span>
+
+      <span
+        ref={markedAsCheckIconRef}
+        className="w-6 h-6 rounded-full ml-2 bg-linear hidden items-center justify-center"
+        onClick={changeMarkAsDoneTask}
+      >
+        <FaCheck className="text-very-light-gray" />
+      </span>
 
       <input
         type="text"
