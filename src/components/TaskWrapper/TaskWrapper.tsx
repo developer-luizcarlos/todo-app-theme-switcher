@@ -63,7 +63,11 @@ const TaskWrapper = ({ id, text, isCompleted }: TaskProps) => {
 
 
   return (
-    <div className={theme == "dark" ? "w-full h-14 bg-very-dark-desaturated-blue rounded flex items-center justify-between" : "w-full h-14 bg-very-light-gray rounded flex items-center justify-between"}>
+    <div
+      className={
+        theme == "dark"
+          ? "w-full h-14 bg-very-dark-desaturated-blue flex items-center justify-between border-b-[1px] border-b-very-dark-grayish-blue first-of-type:rounded first-of-type:rounded-b-none"
+          : "w-full h-14 bg-very-light-gray rounded flex items-center justify-between border-b-[1px] border-b-very-light-grayish-blue first-of-type:rounded first-of-type:rounded-b-none"}>
       <div className="flex items-center gap-3">
         <span
           ref={circleMarkAsChecked}
@@ -86,11 +90,11 @@ const TaskWrapper = ({ id, text, isCompleted }: TaskProps) => {
           className={
             theme === "dark"
               ? isCompleted
-                ? "text-very-light-grayish-blue line-through"
+                ? "text-dark-grayish-blue line-through"
                 : "text-very-light-grayish-blue"
               : isCompleted
-                ? "line-through text-very-dark-grayish-blue"
-                : "text-very-dark-grayish-blue"
+                ? "text-dark-grayish-blue-alt line-through"
+                : "text-very-dark-gray"
           }
           onClick={showInputEditTask}
         >{text}
