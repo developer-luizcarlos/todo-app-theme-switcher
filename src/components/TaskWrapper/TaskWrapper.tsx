@@ -71,6 +71,7 @@ const TaskWrapper = ({ id, text, isCompleted }: TaskProps) => {
         circleMarkAsChecked.current!.style.display = "initial";
         markedAsCheckIconRef.current!.style.display = "none";
       }
+
       return newValue;
     });
   };
@@ -82,12 +83,18 @@ const TaskWrapper = ({ id, text, isCompleted }: TaskProps) => {
         <span
           ref={circleMarkAsChecked}
           className="w-6 h-6 rounded-full border-2 border-dark-grayish-blue ml-2"
-          onClick={changeMarkAsDoneTask}
+          onClick={() => {
+            changeMarkAsDoneTask();
+            dispatch({ type: "DONE", payload: id });
+          }}
         ></span>
         <span
           ref={markedAsCheckIconRef}
           className="w-6 h-6 rounded-full ml-2 bg-linear hidden items-center justify-center"
-          onClick={changeMarkAsDoneTask}
+          onClick={() => {
+            changeMarkAsDoneTask();
+            dispatch({ type: "DONE", payload: id });
+          }}
         >
           <FaCheck className="text-very-light-gray" />
         </span>

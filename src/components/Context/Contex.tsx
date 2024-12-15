@@ -16,6 +16,7 @@ interface ContextType {
 type Action =
   | { type: "ADD"; content: string; completed: boolean; }
   | { type: "EDIT", payload: number, content: string, completed: boolean; }
+  | { type: "DONE", payload: number; }
   ;
 
 type State = { id: number, content: string, completed: boolean; };
@@ -23,7 +24,7 @@ type State = { id: number, content: string, completed: boolean; };
 type ThemeType = "light" | "dark";
 
 const initialTasks: State[] = [
-  { id: 0, content: "Click on me and try to edit", completed: true }
+  { id: 0, content: "Click on me and try to edit", completed: false }
 ];
 
 const reducer = (state: State[], action: Action): State[] => {
@@ -36,6 +37,10 @@ const reducer = (state: State[], action: Action): State[] => {
     case "EDIT":
       return state.map((task) => {
         return task.id === action.payload ? { ...task, content: action.content, completed: action.completed } : task;
+      });
+    case "DONE":
+      return state.map((task) => {
+        return task.id === action.payload ? { ...task, completed: !task.completed } : task;
       });
     default:
       return state;
