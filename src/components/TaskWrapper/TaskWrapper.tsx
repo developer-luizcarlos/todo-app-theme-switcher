@@ -135,7 +135,9 @@ const TaskWrapper = ({ id, text, isCompleted }: TaskProps) => {
       </div>
       <button
         ref={deleteButtonRef}
-        className={theme === "dark" ? "mr-3 text-very-light-grayish-blue" : "mr-3 text-very-dark-grayish-blue"}>
+        className={theme === "dark" ? "mr-3 text-very-light-grayish-blue" : "mr-3 text-very-dark-grayish-blue"}
+        onClick={() => dispatch({ type: "DELETE", payload: id })}
+      >
         <FaTrash />
       </button>
 

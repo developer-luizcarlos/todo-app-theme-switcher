@@ -17,6 +17,7 @@ type Action =
   | { type: "ADD"; content: string; completed: boolean; }
   | { type: "EDIT", payload: number, content: string, completed: boolean; }
   | { type: "DONE", payload: number; }
+  | { type: "DELETE", payload: number; }
   ;
 
 type State = { id: number, content: string, completed: boolean; };
@@ -42,6 +43,8 @@ const reducer = (state: State[], action: Action): State[] => {
       return state.map((task) => {
         return task.id === action.payload ? { ...task, completed: !task.completed } : task;
       });
+    case "DELETE":
+      return state.filter((task) => task.id !== action.payload);
     default:
       return state;
   }
