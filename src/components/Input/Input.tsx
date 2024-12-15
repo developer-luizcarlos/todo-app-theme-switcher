@@ -25,10 +25,12 @@ const Input = () => {
   // functions
   const createTask = (value: string): void => {
     if(value.trim()) {
-      dispatch({ type: "ADD", content: inputValue, completed: isTaskChecked });
+      dispatch({ type: "ADD", content: inputValue, completed: false });
     } else {
       alert("It's impossible to create tasks with empty content.");
     }
+
+    setInputValue("");
   };
 
   const changeMarkAsDoneTask = () => {
