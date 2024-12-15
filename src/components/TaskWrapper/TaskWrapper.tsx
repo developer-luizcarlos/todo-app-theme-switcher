@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 // hooks and utilities importation
@@ -45,7 +46,7 @@ const TaskWrapper = ({ id, text, isCompleted }: TaskProps) => {
 
   const editTaskContent = (id: number) => {
     if(newTaskContent.trim()) {
-      dispatch({ type: "EDIT", payload: id, content: newTaskContent, completed: isTaskChecked });
+      dispatch({ type: "EDIT", payload: id, content: newTaskContent, completed: false });
     } else {
       alert(`It's impossible to edit the task with an empty value`);
     }
