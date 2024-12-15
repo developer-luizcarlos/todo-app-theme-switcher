@@ -8,11 +8,11 @@ import Image from "next/image";
 import { Context } from "@/components/Context/Contex";
 
 // components importation
-
 import Input from "@/components/Input/Input";
+import TaskWrapper from "@/components/TaskWrapper/TaskWrapper";
 
 const Home = () => {
-  const { theme, changeTheme } = useContext(Context)!;
+  const { theme, changeTheme, state } = useContext(Context)!;
 
   return (
     <div className="w-full h-full">
@@ -35,6 +35,15 @@ const Home = () => {
             </div>
             <Input />
           </header>
+
+          <article className={theme == "dark" ? "bg-very-dark-desaturated-blue rounded mt-5" : "bg-very-light-gray rounded mt-5"}>
+            <div>
+              {(state.length) ? state.map((task) => {
+                return <TaskWrapper key={task.id} text={task.content} isCompleted={task.completed}/>;
+              }) : <div><h1>Not found</h1></div>}
+            </div>
+            <footer></footer>
+          </article>
         </section>
       </main>
     </div>

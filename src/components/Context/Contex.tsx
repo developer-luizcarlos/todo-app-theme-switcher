@@ -20,7 +20,7 @@ type State = { id: number, content: string, completed: boolean; };
 type ThemeType = "light" | "dark";
 
 const initialTasks: State[] = [
-  { id: 0, content: "Click on me and try to edit", completed: false }
+  { id: 0, content: "Click on me and try to edit", completed: true }
 ];
 
 const reducer = (state: State[], action: Action): State[] => {
