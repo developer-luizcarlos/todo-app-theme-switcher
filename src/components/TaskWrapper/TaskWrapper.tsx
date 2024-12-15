@@ -23,7 +23,7 @@ const TaskWrapper = ({ id, text, isCompleted }: TaskProps) => {
 
   // States
   const [isTaskChecked, setIsTaskChecked] = useState<boolean>(isCompleted);
-  const [newTaskContent, setNewTaskContent] = useState<string>("");
+  const [newTaskContent, setNewTaskContent] = useState<string>(text);
 
   // refs
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -107,10 +107,11 @@ const TaskWrapper = ({ id, text, isCompleted }: TaskProps) => {
         <input
           ref={inputRef}
           value={newTaskContent}
+          maxLength={40}
           type="text"
           className={
             theme == "dark"
-              ? "h-full text-xl bg-transparent ml-1 text-very-light-gray outline-none border-b-2 border-very-light-grayish-blue hidden" : "h-full text-xl bg-transparent text-very-dark-grayish-blue outline-none border-b-2 border-very-dark-grayish-blue hidden"
+              ? "h-full text-base bg-transparent ml-1 text-very-light-gray outline-none border-b-2 border-very-light-grayish-blue hidden" : "h-full text-base bg-transparent text-very-dark-grayish-blue outline-none border-b-2 border-very-dark-grayish-blue hidden"
           }
           onKeyDown={(e: KeyboardEvent) => {
             if(e.key === "Escape") {
@@ -121,6 +122,7 @@ const TaskWrapper = ({ id, text, isCompleted }: TaskProps) => {
           }
           }
           onChange={(e) => setNewTaskContent(e.target.value)}
+          onFocus={() => inputRef.current!.select()}
         />
       </div>
       <button
