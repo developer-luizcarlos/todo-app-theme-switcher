@@ -15,7 +15,7 @@ import NoData from "@/components/NoData/NoData";
 type tasksShowedType = "all" | "active" | "completed";
 
 const Home = () => {
-  const { theme, changeTheme, state } = useContext(Context)!;
+  const { theme, changeTheme, state, dispatch } = useContext(Context)!;
 
   // states
   const [tasksShowed, setTasksShowed] = useState<tasksShowedType>("all");
@@ -89,6 +89,7 @@ const Home = () => {
               </div>
               <small
                 className={theme === "dark" ? "hover:text-very-light-grayish-blue duration-75 ease cursor-pointer" : "hover:text-very-dark-grayish-blue duration-75 ease cursor-pointer"}
+                onClick={() => dispatch({ type: "CLEAR" })}
               >clear completed</small>
             </footer>
           </article>
