@@ -21,10 +21,8 @@ const TaskWrapper = ({ id, text, isCompleted }: TaskProps) => {
   // context usage
   const { theme, dispatch } = useContext(Context)!;
 
-  // global variables
-  const [isTaskChecked, setIsTaskChecked] = useState<boolean>(false);
-
   // States
+  const [isTaskChecked, setIsTaskChecked] = useState<boolean>(isCompleted);
   const [newTaskContent, setNewTaskContent] = useState<string>("");
 
   // refs
