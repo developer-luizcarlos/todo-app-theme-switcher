@@ -1,7 +1,7 @@
 "use client";
 
 // hooks and utilities importation
-import { KeyboardEvent, useContext, useRef, useState } from "react";
+import { KeyboardEvent, useContext, useRef } from "react";
 
 // context importation
 import { Context } from "../Context/Contex";
@@ -17,10 +17,15 @@ interface TaskProps {
 }
 
 const TaskWrapper = ({ text, isCompleted }: TaskProps) => {
+  // context usage
   const { theme } = useContext(Context)!;
 
-  const [isTaskChecked, setIsTaskChecked] = useState<boolean>(false);
+  // global variables
+  let isTaskChecked: boolean = false;
 
+  // const [isTaskChecked, setIsTaskChecked] = useState<boolean>(false);
+
+  // refs
   const titleRef = useRef<HTMLHeadingElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const circleMarkAsChecked = useRef<HTMLSpanElement>(null);
@@ -28,6 +33,7 @@ const TaskWrapper = ({ text, isCompleted }: TaskProps) => {
   const deleteButtonRef = useRef<HTMLButtonElement>(null);
   const editTaskOptionRef = useRef<HTMLDivElement>(null);
 
+  // functions
   const showInputEditTask = () => {
     titleRef.current!.style.display = "none";
     deleteButtonRef.current!.style.display = "none";
@@ -43,9 +49,7 @@ const TaskWrapper = ({ text, isCompleted }: TaskProps) => {
   };
 
   const changeMarkAsDoneTask = () => {
-    setIsTaskChecked((previousValue) => {
-      return !previousValue;
-    });
+    isTaskChecked = !isTaskChecked;
 
     if(isTaskChecked) {
       circleMarkAsChecked.current!.style.display = "none";
