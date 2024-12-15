@@ -13,7 +13,10 @@ interface ContextType {
   changeTheme: () => void;
 };
 
-type Action = { type: "ADD"; content: string; completed: boolean; };
+type Action =
+  | { type: "ADD"; content: string; completed: boolean; }
+  | { type: "EDIT", payload: number, content: string, completed: boolean; }
+  ;
 
 type State = { id: number, content: string, completed: boolean; };
 
@@ -30,6 +33,10 @@ const reducer = (state: State[], action: Action): State[] => {
         ...state,
         { id: state.length, content: action.content, completed: action.completed }
       ];
+    case "EDIT":
+      return state.map((task) => {
+        return task.id === action.payload ? { ...task, content: action.content, completed: action.completed } : task;
+      });
     default:
       return state;
   }
