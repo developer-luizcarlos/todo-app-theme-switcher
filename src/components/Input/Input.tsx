@@ -19,10 +19,6 @@ const Input = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [isTaskChecked, setIsTaskChecked] = useState<boolean>(false);
 
-  // refs
-  const circleMarkAsChecked = useRef<HTMLSpanElement>(null);
-  const markedAsCheckIconRef = useRef<HTMLSpanElement>(null);
-
   // functions
   const createTask = (value: string): void => {
     if(value.trim()) {
@@ -34,39 +30,14 @@ const Input = () => {
     setInputValue("");
   };
 
-  const changeMarkAsDoneTask = () => {
-    setIsTaskChecked((previousValue) => {
-      const newValue = !previousValue;
-
-      if(newValue) {
-        circleMarkAsChecked.current!.style.display = "none";
-        markedAsCheckIconRef.current!.style.display = "flex";
-      } else {
-        circleMarkAsChecked.current!.style.display = "initial";
-        markedAsCheckIconRef.current!.style.display = "none";
-      }
-
-      return newValue;
-    });
-  };
-
   return (
     <div
       className={theme == "dark" ? "w-full h-14 bg-very-dark-desaturated-blue rounded flex items-center justify-between" : "w-full h-14 bg-very-light-gray rounded flex items-center justify-between"}
     >
       <span
-        ref={circleMarkAsChecked}
         className="w-6 h-6 rounded-full border-2 border-dark-grayish-blue ml-2"
-        onClick={changeMarkAsDoneTask}
+        onClick={() => createTask(inputValue)}
       ></span>
-
-      <span
-        ref={markedAsCheckIconRef}
-        className="w-6 h-6 rounded-full ml-2 bg-linear hidden items-center justify-center"
-        onClick={changeMarkAsDoneTask}
-      >
-        <FaCheck className="text-very-light-gray" />
-      </span>
 
       <input
         type="text"
